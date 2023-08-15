@@ -1,0 +1,53 @@
+program: run_GNN_wandb.py
+method: grid
+parameters:
+  dataset:
+    values: [Cora, Citeseer, Pubmed, chameleon, squirrel, texas, wisconsin, cornell_old, film]
+  block:
+    values: [constant]
+  function:
+    values: [graff]
+  epoch:
+    values: [2]
+  num_splits:
+    values: [5]
+  method:
+    values: [euler]
+  graff_gcn_params:
+    values: [[1, zero, none, 0, False, sum, False, True]]
+  use_best_params:
+    values: ['simple_long']
+  time:
+    values: [64]
+  step_size:
+    values: [0.5]
+  w_param_free:
+    values: [True]
+  self_loops:
+    values: [True]
+  use_mlp:
+    values: [False]
+  conv_batch_norm:
+    values: [False]
+  add_source:
+    values: [False]
+  hidden_dim:
+    values: [128]
+  input_dropout:
+    values: [0.5]
+  dropout:
+    values: [0.35]
+  optimizer:
+    values: [adam]
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+  - --wandb
+  - --wandb_sweep
+  - --geom_gcn_splits
+  - --track_grad_flow
+  - --torch_load_track_gf
+entity: graph_neural_diffusion
+project: graff_simple_extrap_run_saved

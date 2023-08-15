@@ -1,0 +1,58 @@
+program: run_GNN_wandb.py
+method: grid
+parameters:
+  dataset:
+    values: [texas, wisconsin, cornell_old]
+  block:
+    values: [constant]
+  epoch:
+    values: [129]
+  num_splits:
+    values: [10]
+  method:
+    values: [euler]
+  gcn_params:
+    values: [[0, gcn_dgl, True, False, False, True], [5, gcn_res_dgl, True, True, True, False], [6, gcn_res_dgl, True, True, True, True]]
+  omega_style:
+    values: [zero]
+  w_param_free:
+    values: [True]
+  self_loops:
+    values: [True]
+  XN_activation:
+    values: [True]
+  use_mlp:
+    values: [False]
+  conv_batch_norm:
+    values: [False]
+  pointwise_nonlin:
+    values: [False]
+  add_source:
+    values: [False]
+  step_size:
+    values: [1.0]
+  hidden_dim:
+    values: [128]
+  time:
+    values: [2, 4]
+  input_dropout:
+    values: [0.5]
+  dropout:
+    values: [0.35]
+  optimizer:
+
+    values: [adam]
+  lr:
+    values: [0.001, 0.005]
+  decay:
+    values: [0.0005, 0.005, 0.05]
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+  - --wandb
+  - --wandb_sweep
+  - --geom_gcn_splits
+entity: graph_neural_diffusion
+project: gcn_baslines
